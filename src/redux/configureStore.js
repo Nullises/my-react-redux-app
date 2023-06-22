@@ -2,6 +2,7 @@ import { applyMiddleware, compose, createStore } from "redux";
 import rootReducer from "./reducers";
 // Add a 3rd party library for make state immutable
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+import thunk from "redux-thunk";
 
 export default function configureStore(initalState) {
   // Add support for Redux Dev Tools
@@ -14,6 +15,6 @@ export default function configureStore(initalState) {
   return createStore(
     rootReducer,
     initalState,
-    composeEnhancers(applyMiddleware(reduxImmutableStateInvariant()))
+    composeEnhancers(applyMiddleware(thunk, reduxImmutableStateInvariant()))
   );
 }

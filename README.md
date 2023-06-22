@@ -14,7 +14,10 @@ npm i -g concurrently
 
 ## Routes
 
-GET ALL COURSES
+* GET ALL COURSES
 
 GET `http://localhost:3001/courses/`
 
+* GET ALL AUTHORS
+
+GET `http://localhost:3001/authors/`
