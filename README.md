@@ -19,13 +19,3 @@ npm i -g concurrently
 2. Run `prestart:api` to recreate the DB
 
 3. Run `npm run dev` to run concurrently server and Vite app.
-
-## Routes
-
-* GET ALL COURSES
-
-GET `http://localhost:3001/courses/`
-
-* GET ALL AUTHORS
-
-GET `http://localhost:3001/authors/`
