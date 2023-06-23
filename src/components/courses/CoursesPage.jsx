@@ -5,9 +5,14 @@ import * as authorActions from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import CourseList from "./CoursesList";
+import { Navigate } from "react-router-dom";
+
 
 // In this case we will use class component instead functional component
 class CoursePage extends React.Component {
+  state = {
+    redirectToAddCoursePage: false,
+  };
   componentDidMount() {
     const { courses, authors, actions } = this.props;
     if (courses.length === 0) {
@@ -24,7 +29,17 @@ class CoursePage extends React.Component {
   render() {
     return (
       <>
+        {this.state.redirectToAddCoursePage && (
+          <Navigate to="/course" replace />
+        )}
         <h2>Courses</h2>
+        <button
+          style={{ marginBottom: 20 }}
+          className="btn btn-primary add-course"
+          onClick={() => this.setState({ redirectToAddCoursePage: true })}
+        >
+          Add Course
+        </button>
         <CourseList courses={this.props.courses} />
       </>
     );
