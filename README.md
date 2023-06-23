@@ -4,7 +4,7 @@ Based on https://app.pluralsight.com/library/courses/react-redux-react-router-es
 
  BUT... updated with
 
- * React-Rouer v6
+ * React-Router v6
  * Redux Hooks
  * Vite
 
