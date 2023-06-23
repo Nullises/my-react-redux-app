@@ -5,7 +5,8 @@ Based on https://app.pluralsight.com/library/courses/react-redux-react-router-es
  BUT... updated with
 
  * React-Router v6
- * Redux Hooks
+ * React Hooks (useEffect, useState, etc...)
+ * Redux Hooks (useDispatch, useSelector)
  * Vite
 
 1. Install Concurrently globally to run backend and frontend at same time
