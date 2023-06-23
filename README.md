@@ -1,4 +1,12 @@
-# SIMPLE REACT APP MADE WITH VITE AND REDUX AND NODE
+# Building Applications with React 17 and Redux (FULL UPDATED)
+
+Based on https://app.pluralsight.com/library/courses/react-redux-react-router-es6
+
+ BUT... updated with
+
+ * React-Rouer v6
+ * Redux Hooks
+ * Vite
 
 1. Install Concurrently globally to run backend and frontend at same time
 
