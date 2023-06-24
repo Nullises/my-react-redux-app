@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { loadCourses, saveCourse } from "../../redux/actions/courseActions";
 import { loadAuthors } from "../../redux/actions/authorActions";
 import CourseForm from "./CourseForm";
+import Spinner from "../common/Spinner";
+import { toast } from "react-toastify";
 
 // In this case we will use functional compoent
 function ManageCoursePage() {
@@ -16,6 +18,7 @@ function ManageCoursePage() {
   const authors = useSelector((state) => state.authors);
   const [course, setCourse] = useState({});
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (!courses?.length) {
@@ -41,21 +44,48 @@ function ManageCoursePage() {
     }));
   }
 
-  function handleSave(event) {
-    event.preventDefault();
-    dispatch(saveCourse(course));
-    navigate("/courses");
+  // FORM VALIDATION
+  function formIsValid() {
+    const { title, authorId, category } = course;
+    const errors = {};
+
+    if (!title) errors.title = "Title is required.";
+    if (!authorId) errors.author = "Author is required";
+    if (!category) errors.category = "Category is required";
+
+    setErrors(errors);
+    // Form is valid if the errors object still has no properties
+    return Object.keys(errors).length === 0;
   }
 
-  console.log("course", course);
+  function handleSave(event) {
+    event.preventDefault();
+    // If form is invalid doesn't save
+    if (!formIsValid()) return;
+    setSaving(true);
+    dispatch(saveCourse(course))
+      .then(() => {
+        toast.success("Course Saved!");
+        navigate("/courses");
+      })
+      .catch((error) => {
+        setSaving(false);
+        setErrors({
+          onSave: error.message,
+        });
+      });
+  }
 
-  return (
+  return authors.length === 0 || courses.length === 0 ? (
+    <Spinner />
+  ) : (
     <CourseForm
       course={course}
       errors={errors}
       authors={authors}
       onChange={handleChange}
       onSave={handleSave}
+      saving={saving}
     />
   );
 }

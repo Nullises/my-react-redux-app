@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import * as courseApi from "../../api/courseApi";
-
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadCourseSuccess(courses) {
   return {
@@ -23,10 +23,16 @@ export function updateCourseSuccess(course) {
   };
 }
 
+export function deleteCourseOptimistic(course) {
+  return { type: types.DELETE_COURSE_OPTIMISTIC, course };
+}
+
 // My LoadCourses Thunk
 export function loadCourses() {
   // Redux thunk uses the dispatch for me
   return function (dispatch) {
+    // Dispatch the apiCalls
+    dispatch(beginApiCall());
     // Call to my API
     return courseApi
       .getCourses()
@@ -35,6 +41,8 @@ export function loadCourses() {
         dispatch(loadCourseSuccess(courses));
       })
       .catch((error) => {
+        // Call to error action
+        dispatch(apiCallError(error));
         throw error;
       });
   };
@@ -43,6 +51,7 @@ export function loadCourses() {
 // My Save Course Thunk
 export function saveCourse(course) {
   return function (dispatch) {
+    dispatch(beginApiCall());
     return courseApi
       .saveCourse(course)
       .then((savedCourse) => {
@@ -51,7 +60,18 @@ export function saveCourse(course) {
           : dispatch(createCourseSuccess(savedCourse));
       })
       .catch((error) => {
+        // Call to error action
+        dispatch(apiCallError(error));
         throw error;
       });
+  };
+}
+
+export function deleteCourse(course) {
+  return function (dispatch) {
+    // Doing optimistic delete, so not dispatching begin/end api call
+    // actions, or apiCallError action since we're not showing the loading status for this.
+    dispatch(deleteCourseOptimistic(course));
+    return courseApi.deleteCourse(course.id);
   };
 }
