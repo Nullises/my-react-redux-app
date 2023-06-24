@@ -4,8 +4,9 @@ Based on https://app.pluralsight.com/library/courses/react-redux-react-router-es
 
  BUT... updated with
 
- * React-Rouer v6
- * Redux Hooks
+ * React-Router v6
+ * React Hooks (useEffect, useState, etc...)
+ * Redux Hooks (useDispatch, useSelector)
  * Vite
 
 1. Install Concurrently globally to run backend and frontend at same time
@@ -19,13 +20,3 @@ npm i -g concurrently
 2. Run `prestart:api` to recreate the DB
 
 3. Run `npm run dev` to run concurrently server and Vite app.
-
-## Routes
-
-* GET ALL COURSES
-
-GET `http://localhost:3001/courses/`
-
-* GET ALL AUTHORS
-
-GET `http://localhost:3001/authors/`
