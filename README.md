@@ -20,3 +20,8 @@ npm i -g concurrently
 2. Run `prestart:api` to recreate the DB
 
 3. Run `npm run dev` to run concurrently server and Vite app.
+
+### Tests
+
+1. Install Jest globally `yarn global add jest` or `npm install jest --global`
+2. Run `npm run test`
